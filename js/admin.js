@@ -32,6 +32,7 @@ createApp({
     checkModal(item, data){
         if(item === '新增資料'){
           this.tempProduct = {}
+          this.isDelete = false;
           this.isNew = true
           productModal.show();
         } else if (item === '編輯資料'){
@@ -40,6 +41,7 @@ createApp({
           productModal.show();
         } else if (item === '刪除資料'){
           this.tempProduct = { ...data };
+          this.isNew = false
           this.isDelete = true;
           productModal.show();
         }
@@ -82,8 +84,8 @@ createApp({
         } else {
           alert(res.data.message);
         }
-      }).catch(() => {
-        console.log('錯誤')
+      }).catch((error) => {
+        alert(error.data.message);
       })
     },
     // 刪除產品
