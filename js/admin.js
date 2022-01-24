@@ -51,8 +51,8 @@ createApp({
       const url = `${this.apiHex}/api/${this.apiPath}/admin/products`;
       axios.get(url).then((res) => {
         this.products = res.data.products;
-      }).catch(() => {
-        console.log('錯誤')
+      }).catch((err) => {
+        alert(err.data.message)
       })
     },
     // 產品細節
@@ -66,7 +66,9 @@ createApp({
       let id = this.tempProduct.id
       const url = `${this.apiHex}/api/${this.apiPath}/admin/product/${id}`;
       axios.put(url, { data: this.tempProduct }).then((res) => {
-        console.log(res)
+        alert('成功修改')
+      }).catch((err) => {
+        alert(err.data.message)
       })
     },
     // 新增產品
@@ -95,8 +97,8 @@ createApp({
       const url = `${this.apiHex}/api/${this.apiPath}/admin/product/${id}`;
       axios.delete(url).then(() => {
         this.getData()
-      }).catch(() => {
-        console.log('錯誤')
+      }).catch((err) => {
+        alert(err.data.message)
       })
     },
     // 編輯產品
@@ -107,11 +109,10 @@ createApp({
 
       const url = `${this.apiHex}/api/${this.apiPath}/admin/product/${id}`;
       axios.put(url, { data: this.tempProduct }).then(() => {
-        console.log('成功')
         productModal.hide();
         this.getData();
-      }).catch(() => {
-        console.log('錯誤')
+      }).catch((err) => {
+        alert(err.data.message)
       })
     },
     // 圖片上傳
